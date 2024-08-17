@@ -8,6 +8,8 @@ interface ScrollPickerProps {
   ScrollPickerItem?: React.ElementType;
 }
 
+const ITEM_HEIGHT = 50;
+
 const ScrollPicker = ({
   list,
   onSelectedChange,
@@ -21,7 +23,6 @@ const ScrollPicker = ({
   const [selected, setSelected] = useState(1);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const ITEM_HEIGHT = 50;
 
   const handleScroll = useCallback(() => {
     if (ref.current) {
@@ -58,6 +59,7 @@ const ScrollPicker = ({
         <ScrollPickerItem
           key={index}
           isSelected={index === selected}
+          style={{ height: ITEM_HEIGHT }}
           ref={(el: HTMLLIElement | null) => (itemRefs.current[index] = el)}
         >
           {item}
